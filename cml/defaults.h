@@ -61,8 +61,13 @@ Boost Software License, v1.0 (see cml/LICENSE for details).
 
 /* The default memory allocator is std::allocator<void>: */
 #if !defined(CML_DEFAULT_ARRAY_ALLOC)
-#include <memory>               // for std::allocator
-#define CML_DEFAULT_ARRAY_ALLOC std::allocator<void>
+# if __cplusplus <= 201703L
+#  include <memory>               // for std::allocator
+#  define CML_DEFAULT_ARRAY_ALLOC std::allocator<void>
+# else
+#  include "default_allocator.h"
+#  define CML_DEFAULT_ARRAY_ALLOC cml::default_allocator<void>
+# endif
 #endif
 
 /* By default, automatically resize dynamic vectors and matrices: */
