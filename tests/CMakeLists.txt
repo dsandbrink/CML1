@@ -29,6 +29,7 @@ SET(FunctionTests
   )
 FOREACH(Test ${FunctionTests})
   ADD_EXECUTABLE(${Test} ${Test}.cpp)
+  ADD_TEST(${Test} ${Test})
 ENDFOREACH(Test)
 
 # Setup the timing tests:
